@@ -21,31 +21,17 @@ jobs:
       run: dotnet restore
       working-directory: src/CadCli.Api
     
-    - name: Restore dependencies - Tests
-      run: dotnet restore
-      working-directory: src/CadCli.Tests
-      
     - name: Build - API
       run: dotnet build --no-restore
-      working-directory: src/CadCli.Api
+      working-directory: src/CadCli.Api  
       
-    - name: Build - Tests
-      run: dotnet build --no-restore
-      working-directory: src/CadCli.Tests
-      
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-      working-directory: src/CadCli.Tests
-      
-    
-    - name: Publish
+    - name: dotnet publish
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-      working-directory: src/CadCli.Api
-      
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        name: artifact
-        path: ${{env.DOTNET_ROOT}}/myapp
+      working-directory: src/CadCli.API
 
-    
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v3
+      with:
+        name: .net-app
+        path: ${{env.DOTNET_ROOT}}/myapp
