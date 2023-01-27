@@ -26,7 +26,7 @@ jobs:
       working-directory: src/CadCli.Api  
       
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}\myapp
       working-directory: src/CadCli.API
 
 
